@@ -136,7 +136,7 @@ export async function renderVideo(
     args.push('-filter_complex', `${filters.join(';')}`)
 
     // 映射输出流
-    args.push('-map', '[with_subs]', '-map', '[final_audio]')
+      args.push('-map', '[vout]', '-map', '[final_audio]')
 
     // 编码参数
     args.push(
