@@ -38,14 +38,14 @@ export async function renderVideo(
     audioFiles.voice = params.audioFiles?.voice ?? getTempTtsVoiceFilePath()
 
     // 字幕默认配置
-    const subtitleFile =
-      params.subtitleFile ??
-      path
-        .join(
-          path.dirname(getTempTtsVoiceFilePath()),
-          path.basename(getTempTtsVoiceFilePath(), '.mp3') + '.srt',
-        )
-        .replace(/\\/g, '/')
+//    const subtitleFile =
+//      params.subtitleFile ??
+//      path
+//        .join(
+//          path.dirname(getTempTtsVoiceFilePath()),
+//          path.basename(getTempTtsVoiceFilePath(), '.mp3') + '.srt',
+//        )
+//        .replace(/\\/g, '/')
 
     // 输出路径默认配置
     if (!fs.existsSync(path.dirname(params.outputPath))) {
@@ -91,7 +91,7 @@ export async function renderVideo(
     filters.push(`[vconcat]fps=30,format=yuv420p,setpts=PTS-STARTPTS[vout]`)
 
     // 在视频拼接后添加字幕
-    filters.push(`[vout]subtitles=${subtitleFile.replace(/\:/g, '\\\\:')}[with_subs]`)
+//    filters.push(`[vout]subtitles=${subtitleFile.replace(/\:/g, '\\\\:')}[with_subs]`)
 
     // 音频处理：使用响度归一化(loudnorm)确保音量均衡
     const voiceStreamIdx = videoFiles.length
@@ -174,9 +174,9 @@ export async function renderVideo(
     if (fs.existsSync(audioFiles.voice)) {
       fs.unlinkSync(audioFiles.voice)
     }
-    if (fs.existsSync(subtitleFile)) {
-      fs.unlinkSync(subtitleFile)
-    }
+//    if (fs.existsSync(subtitleFile)) {
+//      fs.unlinkSync(subtitleFile)
+//    }
 
     // 返回结果
     return result
